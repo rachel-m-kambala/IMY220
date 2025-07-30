@@ -1,1 +1,1 @@
-# IMY220
+# IMY220 Project - Creating a Version Control Website
