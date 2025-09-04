@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express["static"]('frontend/public'));
 app.post('/api/auth/login', function (req, res) {
-  // Stub: always succeed
   res.json({
     success: true,
     user: {
@@ -19,7 +18,6 @@ app.post('/api/auth/login', function (req, res) {
   });
 });
 app.post('/api/auth/signup', function (req, res) {
-  // Stub: always succeed
   res.json({
     success: true,
     user: {

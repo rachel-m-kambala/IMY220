@@ -1,18 +1,16 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginComponent from '../components/loginComponent';
-import SignupComponent from '../components/signupComponent';
-import logo from '../../public/assets/images/logo.png'
+import logo from '../../public/assets/images/logo.png';
 import '../css/splashPage.css';
 
-function splashPage() {
+function SplashPage() {
     const navigate = useNavigate();
 
   return (
     <div className="splash-bg">
       <div className="splash-container">
-              <div className="splash-logo">{logo()}</div>
+        <div className="splash-logo"><img src={logo} className="logo"/></div>
         <div className="splash-title">CODESYNC</div>
         <div className="splash-subtitle">CODE. SYNC. REPEAT.</div>
         <div className="splash-btn-row">
@@ -34,4 +32,4 @@ function splashPage() {
   );
 }
 
-export default splashPage;
+export default SplashPage;

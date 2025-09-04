@@ -1,7 +1,7 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
 import React, { useState } from 'react';
 
-function signupComponent({ onSignup }) {
+function SignupComponent({ onSignup }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -28,7 +28,8 @@ function signupComponent({ onSignup }) {
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
-    onSignup(data);
+    if (onSignup) onSignup(data);
+    navigate('/home');
   };
 
   return (
@@ -61,4 +62,4 @@ function signupComponent({ onSignup }) {
   );
 }
 
-export default signupComponent;
+export default SignupComponent;

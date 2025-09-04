@@ -1,0 +1,138 @@
+/*Mukaji Mweni Rachel Kambala u23559129 24*/
+/*COLOUR PALETTE HEXCODES:
+Turquoise: #40b5f0
+Blue: #2144c0
+Navy Blue: #14470
+Black: #030303*/
+
+@font-face {
+    font-family: 'DarkLinos';
+    src: url('../../public/assets/fonts/DARKLINOS.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Ethnocentric';
+    src: url('../../public/assets/fonts/Ethnocentric Rg.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'GoodTimes';
+    src: url('../../public/assets/fonts/Good Times Rg.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Pixel';
+    src: url('../../public/assets/fonts/PixelOperatorMono.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Tech';
+    src: url('../../public/assets/fonts/ShareTech-Regular.ttf') format('truetype');
+}
+
+.login-bg {
+    display: flex;
+    min-height: 100vh;
+    background: #bdbdbd;
+}
+
+.login-sidebar {
+    width: 30%;
+    background: #757575;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.login-tab {
+    font-size: 2rem;
+    font-weight: bold;
+    background: #bdbdbd;
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    color: #111;
+    transition: background 0.2s;
+}
+
+.login-tab.active {
+    background: #d1d1d1;
+}
+
+.login-tab:not(.active):hover {
+    background: #e0e0e0;
+}
+
+.login-main {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+    background: #bdbdbd;
+}
+
+.login-logo {
+    width: 60px;
+    margin-bottom: 1rem;
+}
+
+.login-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    font-family: 'Good Times Rg', Arial, sans-serif;
+    letter-spacing: 2px;
+}
+
+.login-form {
+    width: 70%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 40px;
+    border: none;
+    background: #d1d1d1;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-form .forgot {
+    align-self: flex-start;
+    margin-left: 1rem;
+    color: #111;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.login-form button {
+    align-self: flex-end;
+    background: #616161;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 40px;
+    padding: 0.7rem 2.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-form button:hover {
+    background: #424242;
+}

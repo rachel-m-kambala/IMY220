@@ -9,7 +9,7 @@ function loginComponent({ onLogin }) {
 
   const validate = () => {
     if (!email.includes('@')) return 'Email must contain @';
-    if (password.length < 6) return 'Password must be at least 6 characters';
+    if (password.length < 8) return 'Password must be at least 8 characters';
     return '';
   };
 
@@ -27,11 +27,12 @@ function loginComponent({ onLogin }) {
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
-    onLogin(data);
+    if (onLogin) onLogin(data);
+    navigate('/home');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
       <h2>Login</h2>
       <input
         type="email"
@@ -47,6 +48,7 @@ function loginComponent({ onLogin }) {
         required
         onChange={e => setPassword(e.target.value)}
       />
+      <span className="forgot">Forgot password?</span>
       <button type="submit">Log In</button>
       {error && <div style={{color:'red'}}>{error}</div>}
     </form>

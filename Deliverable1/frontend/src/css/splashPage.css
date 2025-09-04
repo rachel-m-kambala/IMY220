@@ -1,9 +1,8 @@
 /*Mukaji Mweni Rachel Kambala u23559129 24*/
-/*Mukaji Mweni Rachel Kambala u23559129 24*/
 /*COLOUR PALETTE HEXCODES:
 Turquoise: #40b5f0
 Blue: #2144c0
-Navy Blue: #14470
+Navy Blue: #142270
 Black: #030303*/
 
 @font-face {
@@ -13,12 +12,12 @@ Black: #030303*/
 
 @font-face {
     font-family: 'Ethnocentric';
-    src: url('../../public/assets/fonts/Ethnocentric Rg.ttf') format('truetype');
+    src: url('../../public/assets/fonts/Ethnocentric Rg.otf') format('truetype');
 }
 
 @font-face {
     font-family: 'GoodTimes';
-    src: url('../../public/assets/fonts/Good Times Rg.ttf') format('truetype');
+    src: url('../../public/assets/fonts/Good Times Rg.otf') format('truetype');
 }
 
 @font-face {
@@ -29,4 +28,96 @@ Black: #030303*/
 @font-face {
     font-family: 'Tech';
     src: url('../../public/assets/fonts/ShareTech-Regular.ttf') format('truetype');
+}
+
+.splash-bg {
+    /* min-height: 100vh; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #142270 20%, #030303 80%);
+}
+
+.splash-container {
+    background: linear-gradient(135deg, #030303 20%, #142270 80%);
+    border: 2px solid #40b5f0;
+    border-radius: 8px;
+    padding: 3rem 4rem;
+    text-align: center;
+    height: 900px;
+    max-width: 1000px; 
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.splash-logo img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.splash-title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #fff;
+    font-family: 'DarkLinos';
+    letter-spacing: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.splash-subtitle {
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: 'Tech', sans-serif;
+    color: #fff;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+}
+
+.splash-btn-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 0;
+}
+
+.splash-btn-box {
+    flex: 1;
+    border: 2px solid #40b5f0;
+    padding: 2rem 1rem;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-btn-box:not(:last-child) {
+    border-right: none;
+}
+
+.splash-btn-box p {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    font-family: 'Pixel', monospace;
+}
+
+.splash-btn {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 0.7rem 2.2rem;
+    border-radius: 4px;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.25s ease;
+}
+
+.splash-btn:hover {
+    background: #40b5f0;
+    border-color: #40b5f0;
+    color: #000;
 }
