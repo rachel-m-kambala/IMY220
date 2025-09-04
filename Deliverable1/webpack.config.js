@@ -1,15 +1,15 @@
-const pah = require("path");
+const path = require("path");
 module.exports = {
-    entry: "frontend/src/index.js",
+    entry: "./frontend/src/index.js",
     output: {
-        path: path.resolve("frontend", "public"),
+        path: path.resolve(__dirname, "frontend", "public"),
         filename: "bundle.js"
     },
     mode: "development",
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader"

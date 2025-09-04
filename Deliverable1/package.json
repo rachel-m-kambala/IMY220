@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack && babel backend/server.js -d backend/dist",
-        "start": "npm run build && node backend/dist/server.js",
+        "start": "npm run build && node backend/server.js",
         "watch": "webpack -w"
     },
     "dependencies": {
@@ -16,7 +16,7 @@
         "react-dom": "^19.1.1",
         "react-router-dom": "^7.8.2"
     },
-    "author": "u23559129 Mukaji Mweni Rcahel Kambala",
+    "author": "u23559129 Mukaji Mweni Rachel Kambala",
     "license": "ISC",
     "repository": {
         "type": "git",
@@ -26,12 +26,12 @@
         "url": "https://github.com/rachel-m-kambala/IMY220/issues"
     },
     "devDependencies": {
-		"@babel/cli": "^7.24.8",
-		"@babel/core": "^7.25.2",
-		"@babel/preset-env": "^7.25.3",
-		"@babel/preset-react": "^7.27.1",
-		"babel-loader": "^10.0.0",
-		"webpack": "^5.101.3",
-		"webpack-cli": "^6.0.1"
-	}
+        "@babel/cli": "^7.24.8",
+        "@babel/core": "^7.25.2",
+        "@babel/preset-env": "^7.25.3",
+        "@babel/preset-react": "^7.27.1",
+        "babel-loader": "^10.0.0",
+        "webpack": "^5.101.3",
+        "webpack-cli": "^6.0.1"
+    }
 }

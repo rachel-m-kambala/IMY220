@@ -1,0 +1,32 @@
+/*Mukaji Mweni Rachel Kambala u23559129 24*/
+/*Mukaji Mweni Rachel Kambala u23559129 24*/
+/*COLOUR PALETTE HEXCODES:
+Turquoise: #40b5f0
+Blue: #2144c0
+Navy Blue: #14470
+Black: #030303*/
+
+@font-face {
+    font-family: 'DarkLinos';
+    src: url('../../public/assets/fonts/DARKLINOS.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Ethnocentric';
+    src: url('../../public/assets/fonts/Ethnocentric Rg.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'GoodTimes';
+    src: url('../../public/assets/fonts/Good Times Rg.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Pixel';
+    src: url('../../public/assets/fonts/PixelOperatorMono.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Tech';
+    src: url('../../public/assets/fonts/ShareTech-Regular.ttf') format('truetype');
+}
