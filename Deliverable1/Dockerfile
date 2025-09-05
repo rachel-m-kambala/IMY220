@@ -1,35 +1,30 @@
 # Use official Node image
 FROM node:18
 
+# Set working directory
 WORKDIR /app
 
-# Copy package files
-COPY package.json ./
+# Copy root and backend/frontend package.json for dependency install
+COPY package.json ./ 
 COPY backend/package.json ./backend/
 COPY frontend/package.json ./frontend/
-
-# Install root dependencies (if any)
-RUN npm install
 
 # Install backend dependencies
 WORKDIR /app/backend
 RUN npm install
 
-# Install frontend dependencies
+# Install frontend dependencies and build
 WORKDIR /app/frontend
 RUN npm install
+RUN npm run build
 
-# Copy all files
+# Copy all app files
 WORKDIR /app
 COPY . .
 
-# Build frontend
-WORKDIR /app/frontend
-RUN npm run build || npm run build:dev || npx webpack
+# Expose port (match server.js)
+EXPOSE 3000
 
-# Expose backend port
-EXPOSE 5000
-
-# Start backend and frontend together (use concurrently if needed)
+# Start backend (which will serve React frontend)
 WORKDIR /app/backend
 CMD ["node", "server.js"]

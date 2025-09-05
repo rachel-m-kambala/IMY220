@@ -16,8 +16,6 @@ function Signup() {
           <button className="login-tab active">SIGN UP</button>
         </div>
       </div>
-
-      {/* Main content */}
       <div className="login-main">
         <img src={logo} alt="Logo" className="login-logo" />
         <h1 className="login-title">HI, DEV!</h1>

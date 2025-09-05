@@ -1,11 +1,13 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function loginComponent({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const validate = () => {
     if (!email.includes('@')) return 'Email must contain @';
@@ -21,14 +23,21 @@ function loginComponent({ onLogin }) {
       return;
     }
     setError('');
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (onLogin) onLogin(data);
-    navigate('/home');
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (onLogin) onLogin(data);
+
+      navigate('/home'); 
+    } catch (error) {
+      setError('Login failed. Please try again.');
+    }
   };
 
   return (

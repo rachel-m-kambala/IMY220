@@ -1,11 +1,13 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignupComponent({ onSignup }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState('');
+    const navigate = useNavigate();
 
   const validate = () => {
     if (!email.includes('@')) return 'Email must contain @';
@@ -22,18 +24,25 @@ function SignupComponent({ onSignup }) {
       return;
     }
     setError('');
-    const res = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (onSignup) onSignup(data);
-    navigate('/home');
+
+    try {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (onSignup) onSignup(data);
+
+      navigate('/home'); 
+    } catch (error) {
+      setError('Signup failed. Please try again.');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
       <h2>Sign Up</h2>
       <input
         type="email"

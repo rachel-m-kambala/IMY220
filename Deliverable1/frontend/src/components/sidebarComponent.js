@@ -1,7 +1,7 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Sidebar.css";
+// import "./Sidebar.css";
 
 const Sidebar = () => {
   return (

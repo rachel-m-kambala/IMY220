@@ -1,6 +1,6 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
 import React from "react";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "./projectCardComponent";
 
 export default function Feed({ activities }) {
   return (

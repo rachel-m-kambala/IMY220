@@ -1,11 +1,11 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import SearchBar from "./SearchBar";
-import FeedToggle from "./FeedToggle";
-import SortDropdown from "./SortDropdown";
-import Feed from "./Feed";
-import ActivitySidebar from "./ActivitySidebar";
+import Sidebar from "../components/sidebarComponent";
+import SearchBar from "../components/searchbarComponent";
+import FeedToggle from "../components/feedToggleComponent";
+import SortDropdown from "../components/dropdownComponent";
+import Feed from "../components/feedComponent";
+import ActivitySidebar from "../components/activitySidebarComponent";
 import "../css/homePage.css";
 
 // Dummy feed data
@@ -45,7 +45,7 @@ const dummyActivities = [
   },
 ];
 
- function HomePage() {
+ function Home() {
   const [feedType, setFeedType] = useState("local");
   const [sortBy, setSortBy] = useState("date");
 
@@ -73,4 +73,4 @@ const dummyActivities = [
     </div>
   );
 }
-export default HomePage;
+export default Home;
