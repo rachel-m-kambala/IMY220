@@ -8,7 +8,7 @@ import Feed from "../components/feedComponent";
 import ActivitySidebar from "../components/activitySidebarComponent";
 import "../css/homePage.css";
 
-// Dummy feed data
+
 const dummyActivities = [
   {
     id: 1,
@@ -49,7 +49,7 @@ const dummyActivities = [
   const [feedType, setFeedType] = useState("local");
   const [sortBy, setSortBy] = useState("date");
 
-  // Sorting logic
+  
   const sortedFeed = [...dummyActivities].sort((a, b) => {
     if (sortBy === "date") return a.id < b.id ? 1 : -1;
     if (sortBy === "popularity") return b.downloads - a.downloads;

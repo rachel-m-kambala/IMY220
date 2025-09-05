@@ -34,19 +34,21 @@ Black: #030303*/
 .homepage {
     display: flex;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
+    font-family: 'Tech';
+    background: linear-gradient(135deg, #142270 20%, #030303 80%);
 }
 
 /* Sidebar */
 .sidebar {
     width: 220px;
-    background: #2d2d2d;
-    color: #fff;
+    background: linear-gradient(135deg, #030303 80%, #142270 20%);
+    color: #ffffff;
     padding: 20px;
 }
 
 .sidebar-title {
-    font-size: 1rem;
+    font-family: 'DarkLinos';
+    font-size: 16px;
     margin-bottom: 20px;
 }
 
@@ -58,12 +60,12 @@ Black: #030303*/
 .sidebar-link {
     display: block;
     padding: 8px 0;
-    color: #ccc;
+    color: #ffffff;
     text-decoration: none;
 }
 
 .sidebar-link:hover {
-    color: #fff;
+    color: #40b5f0;
 }
 
 .sidebar-link.logout {
@@ -89,7 +91,10 @@ Black: #030303*/
 .search-bar {
     flex: 1;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #ffffff;
+    background: #ffffff;
+    color: #030303;
+    font-family: 'Tech';
     border-radius: 4px;
 }
 
@@ -100,22 +105,25 @@ Black: #030303*/
 }
 
 .toggle-button {
+    font-family: 'DarkLinos';
     padding: 6px 12px;
-    border: 1px solid #333;
-    background: #eee;
+    border: 1px solid #030303;
+    background: #ffffff;
     cursor: pointer;
 }
 
 .toggle-button.active {
-    background: #333;
-    color: #fff;
+    background: #40b5f0;
+    color: #ffffff;
 }
 
 /* Sort Dropdown */
 .sort-dropdown {
-    padding: 6px;
-    border: 1px solid #333;
-    border-radius: 4px;
+    font-family: 'DarkLinos';
+        padding: 6px 12px;
+        border: 1px solid #030303;
+        background: #ffffff;
+        cursor: pointer;
 }
 
 /* Content area */
@@ -134,10 +142,10 @@ Black: #030303*/
 
 /* Project Card */
 .project-card {
-    background: #f5f5f5;
+    background: linear-gradient(-135deg, #142270 80%, #2144c0 20%);
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #40b5f0;
 }
 
 .project-card img {
@@ -146,24 +154,40 @@ Black: #030303*/
     border-radius: 4px;
 }
 
+.project-card h3{
+    font-family: 'DarkLinos';
+    color: #ffffff;
+}
+
+.project-card p{
+    font-family: Pixel;
+    color: #ffffff;
+}
+
 /* Activity Sidebar */
 .activity-sidebar {
     flex: 1;
-    background: #fafafa;
+    background: linear-gradient(-135deg, #40b5f0 80%, #2144c0 20%);
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #030303;
     border-radius: 8px;
 }
 
 .activity-sidebar h3 {
+    font-family: 'Tech';
+    color: #ffffff;
     margin-top: 0;
 }
 
 .activity-sidebar h4 {
+    font-family: 'Tech';
+    color: #ffffff;
     margin-bottom: 6px;
 }
 
 .activity-sidebar ul {
+    font-family: 'Pixel';
+    color: #ffffff;
     list-style: disc;
     padding-left: 20px;
     margin-bottom: 12px;
