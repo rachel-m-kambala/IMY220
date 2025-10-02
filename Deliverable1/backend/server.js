@@ -1,22 +1,57 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
-const express = require('express');
-const cors = require('cors');
+
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
 const app = express();
-const port = 3000;
+const PORT = 4000;
 
 app.use(cors());
-app.use(express.json());
-app.use(express.static('frontend/public'));
+app.use(bodyParser.json());
 
-app.post('/api/auth/login', (req, res) => {
+app.post("/signup", (req, res) => {
+  const { email, username, password } = req.body;
+  console.log("Signup attempt:", email, username);
 
-  res.json({ success: true, user: { id: 1, email: req.body.email } });
+  res.json({
+    success: true,
+    message: "User signed up successfully (stub).",
+    user: {
+      id: 1,
+      email,
+      username,
+    },
+  });
 });
 
-app.post('/api/auth/signup', (req, res) => {
-  res.json({ success: true, user: { id: 2, email: req.body.email } });
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  console.log("Login attempt:", email);
+
+  if (email && password) {
+    res.json({
+      success: true,
+      message: "Login successful (stub).",
+      token: "dummy-token-123",
+      user: {
+        id: 1,
+        email,
+      },
+    });
+  } else {
+    res.status(400).json({ success: false, message: "Invalid credentials" });
+  }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Backend running on http://localhost:${PORT}`);
+});
+
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "../frontend-dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend-dist", "index.html"));
 });

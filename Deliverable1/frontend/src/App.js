@@ -1,26 +1,34 @@
 //Mukaji Mweni Rachel Kambala u23559129 24
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SplashPage from './pages/splashPage.js';
-import Home from './pages/home.js';
-import Profile from './pages/profile.js';
-import Project from './pages/project.js';
-import Login from './pages/login.js';
-import Signup from './pages/signup.js';
 
-function App() {
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Splash from "./pages/Splash";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Project from "./pages/Project";
+import Header from "./components/common/Header";
+
+const App = () => {
   return (
-    <Router>
+    <div>
       <Routes>
-        <Route path="/" element={<SplashPage />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/project/:id" element={<Project />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Splash />} />
+        <Route
+          path="/*"
+          element={
+            <>
+              <Header />
+              <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/profile/:id" element={<Profile />} />
+                <Route path="/project/:id" element={<Project />} />
+              </Routes>
+            </>
+          }
+        />
       </Routes>
-    </Router>
+    </div>
   );
-}
+};
 
 export default App;
