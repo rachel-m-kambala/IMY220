@@ -1,0 +1,4 @@
+node_modules/
+frontend/public/bundle.js
+.env
+.DS_Store
