@@ -1,6 +1,25 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
-const express = require("express");
+/*const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const connectDB = async () -> {
+  try{
+    await mongoose.connect(process.env.MONGODB_URI, {
+      user
+    })
+  }
+}*/
+
+/*const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -53,4 +72,4 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
-});
+});*/
