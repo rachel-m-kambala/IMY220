@@ -1,8 +1,9 @@
-//Mukaji Mweni Rachel Kambala u23559129 24
+//Mukaji Mweni Rachel Kambala u23559129 position-24
 
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 const PORT = 4000;
@@ -44,14 +45,12 @@ app.post("/login", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend running on http://localhost:${PORT}`);
-});
-
-const path = require("path");
-
 app.use(express.static(path.join(__dirname, "../frontend-dist")));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "index.html"));
+  res.sendFile(path.join(__dirname, "../frontend-dist", "index.html"));
+});
+
+app.listen(PORT, () => {
+  console.log(`Backend running on http://localhost:${PORT}`);
 });
