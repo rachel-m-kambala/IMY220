@@ -12,17 +12,17 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    lowercase: true
   },
   password: {
     type: String,
     required: true
   },
-
-  profilePicture: String,
+  name: String,
   bio: String,
-  firstName: String,
-  lastName: String,
+  website: String,
+  occupation: String,
 
   friends: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -38,11 +38,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  role: {
-    type: String,
-    enum: ['user', 'admin', 'moderator'],
-    default: 'user'
-  },
+
   createdAt: {
     type: Date,
     default: Date.now
@@ -50,24 +46,18 @@ const userSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now
-  },
-  lastLogin: Date,
-  isActive: {
-    type: Boolean,
-    default: true
   }
 }, {
   timestamps: true
 });
 
-userSchema.virtual('name').get(function() {
-  return this.firstName && this.lastName ? `${this.firstName} ${this.lastName}` : this.username;
+userSchema.virtual('fullName').get(function() {
+  return this.name || this.username;
 });
 
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-
-  if (this.password && this.password.length < 60) { 
+  if (this.password && !this.password.startsWith('$2')) {
     this.password = await bcrypt.hash(this.password, 12);
   }
   next();
