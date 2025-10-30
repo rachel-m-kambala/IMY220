@@ -3,16 +3,16 @@
 import express from 'express';
 import Project from '../models/projects.js';
 import Message from '../models/messages.js';
-import { upload } from '../server.js';
 import auth from '../middleware/auth.js';
+import upload from '../config/multer.js';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
     const projects = await Project.find()
-      .populate('owner', 'username profilePicture')
-      .populate('members.user', 'username profilePicture')
+      .populate('owner', 'username name email')
+      .populate('members.user', 'username name')
       .sort({ createdAt: -1 });
 
     res.json({
@@ -20,47 +20,21 @@ router.get('/', async (req, res) => {
       projects
     });
   } catch (error) {
+    console.error('Error fetching projects:', error);
     res.status(500).json({
       success: false,
-      message: 'Error fetching projects',
-      error: error.message
+      message: 'Error fetching projects'
     });
   }
 });
 
-router.post('/', auth, upload.single('image'), async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const { name, description, hashtags, type } = req.body;
-    
-    const project = new Project({
-      name,
-      description,
-      owner: req.userId,
-      hashtags: hashtags ? hashtags.split(',').map(tag => tag.trim()) : [],
-      type,
-      image: req.file ? `/uploads/${req.file.filename}` : ''
-    });
+    const project = await Project.findById(req.params.id)
+      .populate('owner', 'username name email')
+      .populate('members.user', 'username name')
+      .populate('checkedOutBy', 'username name');
 
-    await project.save();
-    await project.populate('owner', 'username profilePicture');
-
-    res.status(201).json({
-      success: true,
-      message: 'Project created successfully',
-      project
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Error creating project',
-      error: error.message
-    });
-  }
-});
-
-router.post('/:id/files', auth, upload.array('files'), async (req, res) => {
-  try {
-    const project = await Project.findById(req.params.id);
     if (!project) {
       return res.status(404).json({
         success: false,
@@ -68,28 +42,45 @@ router.post('/:id/files', auth, upload.array('files'), async (req, res) => {
       });
     }
 
-    const newFiles = req.files.map(file => ({
-      filename: file.filename,
-      originalName: file.originalname,
-      path: `/uploads/${file.filename}`,
-      size: file.size,
-      uploadedBy: req.userId,
-      version: project.currentVersion
-    }));
-
-    project.files.push(...newFiles);
-    await project.save();
-
     res.json({
       success: true,
-      message: 'Files uploaded successfully',
-      files: newFiles
+      project
     });
   } catch (error) {
+    console.error('Error fetching project:', error);
     res.status(500).json({
       success: false,
-      message: 'Error uploading files',
-      error: error.message
+      message: 'Error fetching project'
+    });
+  }
+});
+
+router.post('/', auth, upload.single('image'), async (req, res) => {
+  try {
+    const { name, description, type, hashtags } = req.body;
+    
+    const project = new Project({
+      name,
+      description,
+      owner: req.userId,
+      type: type || 'web-application',
+      hashtags: hashtags ? hashtags.split(',').map(tag => tag.trim()) : [],
+      image: req.file ? `/uploads/${req.file.filename}` : ''
+    });
+
+    await project.save();
+    await project.populate('owner', 'username name');
+
+    res.status(201).json({
+      success: true,
+      message: 'Project created successfully',
+      project
+    });
+  } catch (error) {
+    console.error('Error creating project:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error creating project'
     });
   }
 });
@@ -97,6 +88,7 @@ router.post('/:id/files', auth, upload.array('files'), async (req, res) => {
 router.post('/:id/checkout', auth, async (req, res) => {
   try {
     const project = await Project.findById(req.params.id);
+    
     if (!project) {
       return res.status(404).json({
         success: false,
@@ -119,7 +111,7 @@ router.post('/:id/checkout', auth, async (req, res) => {
       project: project._id,
       user: req.userId,
       type: 'checkout',
-      message: `Checked out project for editing`
+      message: 'Checked out project for editing'
     });
     await message.save();
 
@@ -129,72 +121,10 @@ router.post('/:id/checkout', auth, async (req, res) => {
       project
     });
   } catch (error) {
+    console.error('Error checking out project:', error);
     res.status(500).json({
       success: false,
-      message: 'Error checking out project',
-      error: error.message
-    });
-  }
-});
-
-router.post('/:id/checkin', auth, upload.array('files'), async (req, res) => {
-  try {
-    const project = await Project.findById(req.params.id);
-    if (!project) {
-      return res.status(404).json({
-        success: false,
-        message: 'Project not found'
-      });
-    }
-
-    if (!project.isCheckedOut || project.checkedOutBy.toString() !== req.userId) {
-      return res.status(400).json({
-        success: false,
-        message: 'Project is not checked out by you'
-      });
-    }
-
-    const { message: checkinMessage } = req.body;
-
-    const newFiles = req.files.map(file => ({
-      filename: file.filename,
-      originalName: file.originalname,
-      path: `/uploads/${file.filename}`,
-      size: file.size,
-      uploadedBy: req.userId,
-      version: project.currentVersion + 1
-    }));
-
-    project.files.push(...newFiles);
-    project.currentVersion += 1;
-    project.isCheckedOut = false;
-    project.checkedOutBy = null;
-    await project.save();
-
-    // Create checkin message
-    const message = new Message({
-      project: project._id,
-      user: req.userId,
-      type: 'checkin',
-      message: checkinMessage || 'Checked in project with updates',
-      files: newFiles.map(file => ({
-        filename: file.filename,
-        path: file.path,
-        version: file.version
-      }))
-    });
-    await message.save();
-
-    res.json({
-      success: true,
-      message: 'Project checked in successfully',
-      project
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Error checking in project',
-      error: error.message
+      message: 'Error checking out project'
     });
   }
 });

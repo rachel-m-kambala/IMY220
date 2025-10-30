@@ -1,9 +1,9 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
 import express from 'express';
-import User from '../models/users.js';
+import User from '../models/User.js';
 import auth from '../middleware/auth.js';
-import { upload } from '../server.js';
+import upload from '../config/multer.js';
 
 const router = express.Router();
 
@@ -39,7 +39,14 @@ router.put('/profile', auth, upload.single('profilePicture'), async (req, res) =
     
     if (req.body.username) updates.username = req.body.username;
     if (req.body.bio) updates.bio = req.body.bio;
-    if (req.file) updates.profilePicture = `/uploads/${req.file.filename}`;
+    if (req.body.location) updates.location = req.body.location;
+    if (req.body.occupation) updates.occupation = req.body.occupation;
+    if (req.body.website) updates.website = req.body.website;
+    if (req.body.name) updates.name = req.body.name;
+    
+    if (req.file) {
+      updates.profilePicture = `/uploads/${req.file.filename}`;
+    }
 
     const user = await User.findByIdAndUpdate(
       req.userId,
@@ -153,7 +160,7 @@ router.post('/friend-requests/:requestId/accept', auth, async (req, res) => {
 router.get('/friend-requests/pending', auth, async (req, res) => {
   try {
     const user = await User.findById(req.userId)
-      .populate('friendRequests.from', 'username profilePicture')
+      .populate('friendRequests.from', 'username profilePicture name')
       .select('friendRequests');
 
     const pendingRequests = user.friendRequests.filter(
