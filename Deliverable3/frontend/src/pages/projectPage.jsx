@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { apiClient } from '../utils/api.js';
+import { apiClient } from '../utils/api.jsx';
 
 const ProjectPage = ({ currentUser }) => {
   const { id } = useParams();

@@ -1,7 +1,7 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
 import express from 'express';
-import User from '../models/users.js';
+import User from '../models/users.jsx';
 import { createSession, deleteSession } from '../middleware/auth.js';
 
 const router = express.Router();

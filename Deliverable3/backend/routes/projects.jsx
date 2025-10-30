@@ -1,10 +1,10 @@
 //Mukaji Mweni Rachel Kambala u23559129
 
 import express from 'express';
-import Project from '../models/projects.js';
-import Message from '../models/messages.js';
-import auth from '../middleware/auth.js';
-import upload from '../config/multer.js';
+import Project from '../models/projects.jsx';
+import Message from '../models/messages.jsx';
+import auth from '../middleware/auth.jsx';
+import upload from '../config/multer.jsx';
 
 const router = express.Router();
 

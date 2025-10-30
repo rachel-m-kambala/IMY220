@@ -1,8 +1,8 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
 import express from 'express';
-import Message from '../models/messages.js';
-import auth from '../middleware/auth.js';
+import Message from '../models/messages.jsx';
+import auth from '../middleware/auth.jsx';
 
 const router = express.Router();
 

@@ -1,9 +1,9 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
 import mongoose from 'mongoose';
-import User from '../models/User.js';
-import Project from '../models/projects.js';
-import Message from '../models/messages.js';
+import User from '../models/User.jsx';
+import Project from '../models/projects.jsx';
+import Message from '../models/messages.jsx';
 import bcrypt from 'bcryptjs';
 
 const initializeSampleData = async () => {

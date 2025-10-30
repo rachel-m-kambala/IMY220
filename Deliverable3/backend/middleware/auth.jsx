@@ -1,6 +1,6 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
-import User from "../models/users.js";
+import User from "../models/users.jsx";
 
 const sessions = new Map();
 
@@ -33,7 +33,6 @@ export const deleteSession = (sessionToken) => {
   sessions.delete(sessionToken);
 };
 
-// Clean up expired sessions (24 hours)
 setInterval(() => {
   const now = new Date();
   for (const [token, session] of sessions.entries()) {

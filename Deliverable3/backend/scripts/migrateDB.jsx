@@ -1,8 +1,8 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
 import mongoose from 'mongoose';
-import User from '../models/users.js';
-import Project from '../models/projects.js';
+import User from '../models/users.jsx';
+import Project from '../models/projects.jsx';
 import bcrypt from 'bcryptjs';
 
 const migrateExistingData = async () => {

@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { apiClient } from './utils/api.js';
-import SplashPage from './pages/splashPage.js';
-import HomePage from './pages/homePage.js';
-import ProfilePage from './pages/profilePage.js';
-import ProjectPage from './pages/profilePage.js';
-import SearchPage from './pages/searchPage.js';
-import CreateProjectPage from './pages/createProjectPage.js';
+import { apiClient } from './utils/api.jsx';
+import SplashPage from './pages/splashPage.jsx';
+import HomePage from './pages/homePage.jsx';
+import ProfilePage from './pages/profilePage.jsx';
+import ProjectPage from './pages/profilePage.jsx';
+import SearchPage from './pages/searchPage.jsx';
+import CreateProjectPage from './pages/createProjectPage.jsx';
 
 const App = () => {
   const [user, setUser] = useState(null);

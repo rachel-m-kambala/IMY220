@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { apiClient } from '../utils/api.js';
-import ProfileEditor from '../components/user/profileEditor.js';
+import { apiClient } from '../utils/api.jsx';
+import ProfileEditor from '../components/user/profileEditor.jsx';
 
 const ProfilePage = ({ currentUser }) => {
   const { id } = useParams();

@@ -1,7 +1,7 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
 import React, { useState } from 'react';
-import { apiClient } from '../../utils/api.js';
+import { apiClient } from '../../utils/api.jsx';
 
 const ProfileEditor = ({ user, onSave, onCancel }) => {
   const [formData, setFormData] = useState({

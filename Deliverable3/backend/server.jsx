@@ -5,10 +5,10 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import authRoutes from './routes/auth.js';
-import userRoutes from './routes/users.js';
-import projectRoutes from './routes/projects.js';
-import messageRoutes from './routes/messages.js';
+import authRoutes from './routes/auth.jsx';
+import userRoutes from './routes/users.jsx';
+import projectRoutes from './routes/projects.jsx';
+import messageRoutes from './routes/messages.jsx';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,15 +23,14 @@ import fs from 'fs';
 if (!fs.existsSync('uploads')) {
   fs.mkdirSync('uploads');
 }
-
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://u23559129_db_userJlNITZAQpcPwaLaZ@cluster0.udird4d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = 'mongodb://localhost:27017/codesync';
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(() => {
-  console.log('Connected to codesync database');
+  console.log('Connected to LOCAL codesync database');
 })
 .catch(err => {
   console.error('MongoDB connection error:', err);
@@ -52,8 +51,8 @@ app.get('/api/health', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Backend server running on http://localhost:${PORT}`);
-  console.log(`🔍 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`Backend server running on http://localhost:${PORT}`);
+  console.log(`Health check: http://localhost:${PORT}/api/health`);
 });
 
 //'mongodb+srv://u23559129_db_userJlNITZAQpcPwaLaZ@cluster0.udird4d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';

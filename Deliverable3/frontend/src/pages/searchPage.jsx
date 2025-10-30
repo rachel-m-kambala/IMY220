@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { apiClient } from '../utils/api.js';
-import ProjectCard from '../components/project/projectCard.js';
+import { apiClient } from '../utils/api.jsx';
+import ProjectCard from '../components/project/projectCard.jsx';
 
 const SearchPage = ({ user }) => {
   const [searchParams, setSearchParams] = useSearchParams();

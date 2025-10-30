@@ -1,8 +1,8 @@
 //Mukaji Mweni Rachel Kambala u23559129 position-24
 
 import React, { useState } from 'react';
-import LoginForm from '../components/authentication/loginForm.js';
-import SignupForm from '../components/authentication/signupForm.js';
+import LoginForm from '../components/authentication/loginForm.jsx';
+import SignupForm from '../components/authentication/signupForm.jsx';
 
 const SplashPage = ({ onLogin }) => {
   const [showLogin, setShowLogin] = useState(true);
