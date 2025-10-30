@@ -1,44 +1,37 @@
 {
-    "name": "project1-deliverable1",
-    "version": "1.0.0",
-    "description": "IMY 220 Project Deliverable 1",
-    "main": "frontend/src/index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "webpack && babel backend/server.js -d backend/dist",
-        "start": "npm run build && node backend/server.js",
-        "watch": "webpack -w"
-    },
-    "dependencies": {
-        "body-parser": "^2.2.0",
-        "cors": "^2.8.5",
-        "css-loader": "^7.1.2",
-        "express": "^4.21.2",
-        "mongodb": "^6.20.0",
-        "path": "^0.12.7",
-        "react": "^19.1.1",
-        "react-dom": "^19.1.1",
-        "react-router-dom": "^7.8.2",
-        "style-loader": "^4.0.0"
-    },
-    "author": "u23559129 Mukaji Mweni Rachel Kambala",
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/rachel-m-kambala/IMY220.git"
-    },
-    "bugs": {
-        "url": "https://github.com/rachel-m-kambala/IMY220/issues"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.24.8",
-        "@babel/core": "^7.25.2",
-        "@babel/preset-env": "^7.25.3",
-        "@babel/preset-react": "^7.27.1",
-        "babel-loader": "^10.0.0",
-        "webpack": "^5.101.3",
-        "webpack-cli": "^6.0.1"
-    },
-    "keywords": [],
-    "homepage": "https://github.com/rachel-m-kambala/IMY220#readme"
+  "name": "codesync-version-control",
+  "version": "1.0.0",
+  "description": "CodeSync - Version Control Website for IMY 220 Project",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down"
+  },
+  "keywords": [
+    "version-control",
+    "react",
+    "mongodb",
+    "express",
+    "docker",
+    "university-project"
+  ],
+  "author": "Mukaji Mweni Rachel Kambala",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
 }

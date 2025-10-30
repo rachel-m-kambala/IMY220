@@ -1,33 +1,20 @@
-# ---- Stage 1: Build React frontend ----
-FROM node:18-alpine AS frontend-build
-WORKDIR /app/frontend
-
-# Install frontend dependencies
-COPY frontend/package*.json ./
-RUN npm install
-
-# Copy all frontend source and build
-COPY frontend/ ./
-RUN npm run build   # outputs to frontend/dist (adjust if you use 'build')
-
-# ---- Stage 2: Setup backend + serve frontend ----
+# Backend
 FROM node:18-alpine
 WORKDIR /app
-
-# Install backend dependencies
-COPY backend/package*.json ./backend/
-WORKDIR /app/backend
+COPY package*.json ./
 RUN npm install
+COPY . .
+RUN mkdir -p uploads
+EXPOSE 5000
+CMD ["npm", "start"]
 
-# Copy backend code
-COPY backend/ ./
-
-# Copy built frontend into backend's public folder
+#Frontend
+FROM node:18-alpine
 WORKDIR /app
-COPY --from=frontend-build /app/frontend/dist ./frontend-dist
-
-# Expose backend port
-EXPOSE 4000
-
-# Start server (modify server.js to serve frontend files)
-CMD ["node", "backend/server.js"]
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+RUN npm install -g serve
+EXPOSE 3000
+CMD ["serve", "-s", "dist", "-l", "3000"]

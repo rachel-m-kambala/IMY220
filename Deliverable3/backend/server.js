@@ -42,7 +42,27 @@ mongoose.connect(MONGODB_URI, {
   console.log('Connected to codesync database');
   console.log('Collections available: users, projects, messages');
 })
-.catch(err => console.error('MongoDB connection error:', err));   
+  .catch(err => console.error('MongoDB connection error:', err));
+
+mongoose.connection.once('open', async () => {
+  console.log('✅ Connected to codesync database');
+
+  try {
+    const { default: checkDatabaseCompatibility } = await import('./scripts/checkDatabase.js');
+    await checkDatabaseCompatibility();
+  } catch (error) {
+    console.log('Database check skipped:', error.message);
+  }
+
+  if (process.env.RUN_MIGRATION === 'true') {
+    try {
+      const { default: migrateExistingData } = await import('./scripts/migrateDatabase.js');
+      await migrateExistingData();
+    } catch (error) {
+      console.log('Migration skipped:', error.message);
+    }
+  }
+});   
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);

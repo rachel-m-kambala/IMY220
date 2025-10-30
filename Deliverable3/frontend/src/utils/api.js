@@ -25,14 +25,16 @@ class ApiClient {
     try {
       const response = await fetch(url, config);
       
-      // Handle non-JSON responses
-      const contentType = response.headers.get('content-type');
-      const data = contentType?.includes('application/json') 
-        ? await response.json() 
-        : await response.text();
+      if (response.status === 401) {
+        this.setSession(null, null);
+        window.location.href = '/';
+        throw new Error('Session expired');
+      }
+
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(typeof data === 'object' ? data.message : 'Request failed');
+        throw new Error(data.message || 'Request failed');
       }
 
       return data;
@@ -42,15 +44,38 @@ class ApiClient {
     }
   }
 
-  // Updated to handle your user data structure
+  async upload(endpoint, formData) {
+    const url = `${API_BASE}${endpoint}`;
+    const config = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${this.sessionToken}`
+      },
+      body: formData
+    };
+
+    try {
+      const response = await fetch(url, config);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Upload failed');
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Upload failed:', error);
+      throw error;
+    }
+  }
+
   setSession(sessionToken, user) {
     this.sessionToken = sessionToken;
     this.user = user;
     
     if (sessionToken && user) {
       localStorage.setItem('sessionToken', sessionToken);
-      
-      // Ensure user has all required fields for frontend
+
       const userWithDefaults = {
         id: user.id || user._id,
         username: user.username,
@@ -58,7 +83,10 @@ class ApiClient {
         name: user.name || user.username,
         profilePicture: user.profilePicture || '',
         bio: user.bio || '',
+        website: user.website || '',
+        occupation: user.occupation || '',
         isAdmin: user.isAdmin || false,
+        friends: user.friends || [],
         ...user
       };
       
@@ -71,18 +99,45 @@ class ApiClient {
     }
   }
 
-  // Updated user profile display component
+  async verifySession() {
+    if (!this.sessionToken) {
+      return false;
+    }
+
+    try {
+      const response = await this.request('/auth/verify');
+      this.setSession(this.sessionToken, response.user);
+      return true;
+    } catch (error) {
+      this.setSession(null, null);
+      return false;
+    }
+  }
+
+  async logout() {
+    try {
+      await this.request('/auth/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      this.setSession(null, null);
+    }
+  }
+
+  isAuthenticated() {
+    return !!this.sessionToken && !!this.user;
+  }
+
   getUserDisplayName() {
     if (!this.user) return 'User';
     return this.user.name || this.user.username;
   }
 
-  // Updated project data formatting
   formatProjectForDisplay(project) {
     return {
       ...project,
       displayName: project.name,
-      displayTags: project.allTags || project.tags || project.hashtags || [],
+      displayTags: project.tags || project.hashtags || [],
       ownerName: project.owner?.name || project.owner?.username || 'Unknown'
     };
   }
